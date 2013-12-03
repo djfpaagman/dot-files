@@ -9,16 +9,24 @@ filetype plugin indent on
 "" Basic Setup
 ""
 
-set number            " Show line numbers
-set relativenumber    " Show relative line number
-set ruler             " Show line and column number
-syntax enable         " Turn on syntax highlighting allowing local overrides
-set encoding=utf-8    " Set default encoding to UTF-8
-set guifont=Inconsolata\ for\ Powerline:h18
-" set guifont=Monaco\ for\ Powerline:h14
-color tomorrow-night
-set wrap
-set autoread
+set number                                  " Show line numbers
+set relativenumber                          " Show relative line number
+set ruler                                   " Show line and column number
+syntax enable                               " Turn on syntax highlighting allowing local overrides
+set encoding=utf-8                          " Set default encoding to UTF-8
+color tomorrow-night                        " Set Theme
+set wrap                                    " Wrap lines
+set autoread                                " Auto reload changed files
+
+" Set font size based on screen size. When vertical height is greater than 800
+" (i.e. an external monitor is attached on a regular 13" MBP), use 18, else use 16.
+if has('mac')
+  if system("osascript -e 'tell application \"Finder\" to get bounds of window of desktop' | cut -d ',' -f 4 | xargs") > 800
+    set guifont=Inconsolata\ for\ Powerline:h18
+  else
+    set guifont=Inconsolata\ for\ Powerline:h16
+  endif
+endif
 
 " These are advanced settings. The arrow keys won't work at all now.
 " Turn off arrow keys in normal mode
