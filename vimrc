@@ -6,7 +6,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'mileszs/ack.vim'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'kien/ctrlp.vim'
@@ -28,6 +27,11 @@ Plugin 'tpope/vim-sensible'
 Plugin 'slim-template/vim-slim'
 Plugin 'tpope/vim-surround'
 Plugin 'chriskempson/vim-tomorrow-theme'
+Plugin 'terryma/vim-expand-region'
+Plugin 'trusktr/seti.vim'
+Plugin 'gosukiwi/vim-atom-dark'
+Plugin 'StanAngeloff/php.vim'
+Plugin 'DataWraith/auto_mkdir'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -36,6 +40,8 @@ filetype plugin indent on    " required
 execute pathogen#infect()
 
 let g:ruby_path = system('echo $HOME/.rbenv/shims')
+let g:ycm_path_to_python_interpreter = '/usr/bin/python2.5'
+
 
 ""
 "" Basic Setup
@@ -46,24 +52,10 @@ set relativenumber                          " Show relative line number
 set ruler                                   " Show line and column number
 syntax enable                               " Turn on syntax highlighting allowing local overrides
 set encoding=utf-8                          " Set default encoding to UTF-8
-color tomorrow-night                        " Set Theme
+color atom-dark                             " Set Theme
 set wrap                                    " Wrap lines
 set autoread                                " Auto reload changed files
-
-" Set font size based on screen size. When vertical height is greater than 800
-" (i.e. an external monitor is attached on a regular 13" MBP), use 18, else use 16.
-function! SetRelativeFontSize()
-  if has('mac')
-    if system("osascript -e 'tell application \"Finder\" to get bounds of window of desktop' | cut -d ',' -f 4 | xargs") > 800
-      set guifont=Inconsolata\ for\ Powerline:h18
-    else
-      set guifont=Inconsolata\ for\ Powerline:h16
-    endif
-  endif
-endfunction
-
-autocmd VimResized * :call SetRelativeFontSize()
-autocmd VimEnter * :call SetRelativeFontSize()
+set colorcolumn=80                          " Show 80 char wrapping line
 
 " These are advanced settings. The arrow keys won't work at all now.
 " Turn off arrow keys in normal mode
@@ -85,6 +77,9 @@ nnoremap <C-H> <C-W><C-H>
 " Airline settings
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'tomorrow'
+
+" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h14
+set guifont=Inconsolata\ for\ Powerline:h18
 
 ""
 "" Searching
@@ -139,7 +134,7 @@ autocmd VimResized * :wincmd =
 
 " keyboard shortcuts
 let mapleader = ','
-nmap <leader>a :Ack! 
+nmap <leader>a :Ack!<Space>
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>t :CtrlP<CR>
 map <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -149,6 +144,9 @@ map <leader>s :sp<CR>
 map <leader>q :q<CR>
 map <leader>Q :q!<CR>
 map <leader>w :w<CR>
+
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
@@ -166,9 +164,7 @@ autocmd BufReadPost *
 " Remember info about open buffers on close
 set viminfo^=%
 
-" Fix bug in vim-slim that makes vim render pages with doctype as html
-" https://github.com/slim-template/vim-slim/issues/38
-autocmd BufNewFile,BufRead *.slim set syntax=slim|set ft=slim
-
 " Use Silver Searcher instead of Ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
+
+set re=1
