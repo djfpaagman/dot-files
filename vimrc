@@ -8,12 +8,12 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'kien/ctrlp.vim'
 Plugin 'roman/golden-ratio'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ervandew/supertab'
 Plugin 'scrooloose/syntastic'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-commentary'
 Plugin 'ap/vim-css-color'
@@ -24,14 +24,25 @@ Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-rails'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-sensible'
-Plugin 'slim-template/vim-slim'
+" Plugin 'slim-template/vim-slim'
+" Try another plugin because this one is SLOW
+Plugin 'onemanstartup/vim-slim'
 Plugin 'tpope/vim-surround'
 Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'terryma/vim-expand-region'
 Plugin 'trusktr/seti.vim'
-Plugin 'gosukiwi/vim-atom-dark'
 Plugin 'StanAngeloff/php.vim'
 Plugin 'DataWraith/auto_mkdir'
+Plugin 'pangloss/vim-javascript'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'mxw/vim-jsx'
+Plugin 'tpope/vim-dispatch'
+Plugin 'junegunn/fzf.vim'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'posva/vim-vue'
+Plugin 'elixir-editors/vim-elixir'
+
+set rtp+=/usr/local/opt/fzf
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -52,10 +63,12 @@ set relativenumber                          " Show relative line number
 set ruler                                   " Show line and column number
 syntax enable                               " Turn on syntax highlighting allowing local overrides
 set encoding=utf-8                          " Set default encoding to UTF-8
-color atom-dark                             " Set Theme
+let base16colorspace=256
+color Tomorrow-Night-Eighties              " Set Theme
 set wrap                                    " Wrap lines
 set autoread                                " Auto reload changed files
-set colorcolumn=80                          " Show 80 char wrapping line
+execute "set colorcolumn=" . join(range(81,335), ',')
+
 
 " These are advanced settings. The arrow keys won't work at all now.
 " Turn off arrow keys in normal mode
@@ -78,8 +91,9 @@ nnoremap <C-H> <C-W><C-H>
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'tomorrow'
 
-" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h14
-set guifont=Inconsolata\ for\ Powerline:h18
+" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
+set macligatures
+set guifont=Fira\ Code:h17
 
 ""
 "" Searching
@@ -108,7 +122,7 @@ set listchars+=extends:>          " The character to show in the last column whe
                                   " off and the line continues beyond the right of the screen
 set listchars+=precedes:<         " The character to show in the last column when wrap is
                                   " off and the line continues beyond the left of the screen
-                                  "
+
 " Highlight trailing whitespace with a red background
 highlight SpecialKey guifg=#222222 guibg=#FF0000
 
@@ -118,16 +132,10 @@ au BufRead,BufNewFile *.md set filetype=markdown
 if executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
 endif
 
 " extra rails.vim help
-autocmd User Rails silent! Rnavcommand decorator      app/decorators            -glob=**/* -suffix=_decorator.rb
+autocmd User Rails silent! Rnavcommand decorator app/decorators -glob=**/* -suffix=_decorator.rb
 
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
@@ -136,7 +144,6 @@ autocmd VimResized * :wincmd =
 let mapleader = ','
 nmap <leader>a :Ack!<Space>
 nmap <leader>d :NERDTreeToggle<CR>
-nmap <leader>t :CtrlP<CR>
 map <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 nmap <leader>/ :noh<CR>
 nmap <leader>v :vs<CR>
@@ -144,6 +151,9 @@ map <leader>s :sp<CR>
 map <leader>q :q<CR>
 map <leader>Q :q!<CR>
 map <leader>w :w<CR>
+nmap ; :Buffers<CR>
+nmap <Leader>t :Files<CR>
+nmap <Leader>r :Tags<CR>
 
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
@@ -151,16 +161,17 @@ vmap <C-v> <Plug>(expand_region_shrink)
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
 
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
+" Turn backup off, since most stuff is in git anyway...
 set nobackup
 set nowb
 set noswapfile
 
-" Return to last edit position when opening files (You want this!)
+" Return to last edit position when opening files
 autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
+
 " Remember info about open buffers on close
 set viminfo^=%
 
@@ -168,3 +179,8 @@ set viminfo^=%
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
 set re=1
+
+function! GHOpen()
+  silent! :call system('ghopen ' . expand('%') . ' ' . line('.'))
+endfunction
+map <silent><F2> :call GHOpen()<return>
