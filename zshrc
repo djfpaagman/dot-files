@@ -51,7 +51,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rbenv brew bundler dirhistory gem rails)
+plugins=(git rbenv brew bundler dirhistory gem rails z zsh-nvm)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -85,8 +85,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 alias gap='git add -p'
-
-eval "$(rbenv init -)"
+alias gcane='git commit --amend --no-edit'
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -108,3 +107,16 @@ export FZF_DEFAULT_OPTS='
 export GPG_TTY=$(tty)
 
 export EDITOR="mvim -f"
+
+export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+export ANDROID_HOME=/Users/Dennis/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

@@ -4,7 +4,6 @@ filetype off
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 Plugin 'gmarik/Vundle.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'cakebaker/scss-syntax.vim'
@@ -19,6 +18,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'ap/vim-css-color'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-rails'
@@ -29,18 +29,19 @@ Plugin 'tpope/vim-sensible'
 Plugin 'onemanstartup/vim-slim'
 Plugin 'tpope/vim-surround'
 Plugin 'chriskempson/vim-tomorrow-theme'
-Plugin 'terryma/vim-expand-region'
-Plugin 'trusktr/seti.vim'
 Plugin 'StanAngeloff/php.vim'
 Plugin 'DataWraith/auto_mkdir'
 Plugin 'pangloss/vim-javascript'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'mxw/vim-jsx'
-Plugin 'tpope/vim-dispatch'
 Plugin 'junegunn/fzf.vim'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'peitalin/vim-jsx-typescript'
 Plugin 'posva/vim-vue'
-Plugin 'elixir-editors/vim-elixir'
+Plugin 'zxqfl/tabnine-vim'
+Plugin 'drewtempelmeyer/palenight.vim'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'digitaltoad/vim-pug'
 
 set rtp+=/usr/local/opt/fzf
 
@@ -64,11 +65,16 @@ set ruler                                   " Show line and column number
 syntax enable                               " Turn on syntax highlighting allowing local overrides
 set encoding=utf-8                          " Set default encoding to UTF-8
 let base16colorspace=256
-color Tomorrow-Night-Eighties              " Set Theme
+color palenight                             " Set Theme
+set background=dark
 set wrap                                    " Wrap lines
 set autoread                                " Auto reload changed files
 execute "set colorcolumn=" . join(range(81,335), ',')
 
+if (has("termguicolors"))
+  set termguicolors
+endif
+let g:palenight_terminal_italics=1
 
 " These are advanced settings. The arrow keys won't work at all now.
 " Turn off arrow keys in normal mode
@@ -91,9 +97,10 @@ nnoremap <C-H> <C-W><C-H>
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'tomorrow'
 
-" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
 set macligatures
-set guifont=Fira\ Code:h17
+" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
+" set guifont=Fira\ Code:h19
+set guifont=CascadiaCode\ Nerd\ Font:h17
 
 ""
 "" Searching
@@ -180,7 +187,4 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 
 set re=1
 
-function! GHOpen()
-  silent! :call system('ghopen ' . expand('%') . ' ' . line('.'))
-endfunction
-map <silent><F2> :call GHOpen()<return>
+set rtp+=/usr/local/opt/fzf
