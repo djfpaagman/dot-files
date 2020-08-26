@@ -100,7 +100,7 @@ let g:airline_theme = 'tomorrow'
 set macligatures
 " set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
 " set guifont=Fira\ Code:h19
-set guifont=CascadiaCode\ Nerd\ Font:h17
+set guifont=Delugia\ Nerd\ Font:h17
 
 ""
 "" Searching

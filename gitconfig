@@ -1,0 +1,14 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+ 	name = Dennis Paagman
+ 	email = dennispaagman@gmail.com
+[core]
+	editor = mvim
+[init]
+	defaultBranch = main
+[color]
+	ui = auto
+[diff]
+	mnemonicPrefix = true
+	renames = true
