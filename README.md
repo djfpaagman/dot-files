@@ -6,8 +6,18 @@ These are the config files I use to set up my system the way I like it. I use OS
 git clone git@github.com:djfpaagman/dot-files.git ~/.dot-files
 ```
 
+## Dependencies
+
+* [macvim](https://github.com/macvim-dev/macvim)
+* [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
+* [alacritty](https://github.com/alacritty/alacritty)
+* [powerlevel10k](https://github.com/romkatv/powerlevel10k)
+
 ## Vim
 ```sh
 ln -s ~/.dot-files/vimrc ~/.vimrc
 ln -s ~/.dot-files/vim ~/.vim
+ln -s ~/.dot-files/p10k.zsh ~/.p10k.zsh
+ln -s ~/.dot-files/zshrc ~/.zshrc
+ln -s ~/.dot-files/alacritty.yml ~/.alacritty.yml
 ```
