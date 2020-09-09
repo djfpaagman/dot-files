@@ -3,8 +3,9 @@
 # Please adapt and uncomment the following lines:
  	name = Dennis Paagman
  	email = dennispaagman@gmail.com
+	signingkey = D653D0F7CA32C76B
 [core]
-	editor = mvim
+	editor = mvim -f
 [init]
 	defaultBranch = main
 [color]
@@ -12,3 +13,9 @@
 [diff]
 	mnemonicPrefix = true
 	renames = true
+[help]
+	autocorrect = 1
+[commit]
+	gpgsign = true
+[pull]
+	rebase = true
