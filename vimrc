@@ -33,15 +33,16 @@ Plugin 'StanAngeloff/php.vim'
 Plugin 'DataWraith/auto_mkdir'
 Plugin 'pangloss/vim-javascript'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'mxw/vim-jsx'
+" Plugin 'mxw/vim-jsx'
 Plugin 'junegunn/fzf.vim'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'peitalin/vim-jsx-typescript'
+" Plugin 'leafgarland/typescript-vim'
+" Plugin 'peitalin/vim-jsx-typescript'
 Plugin 'posva/vim-vue'
 Plugin 'zxqfl/tabnine-vim'
 Plugin 'drewtempelmeyer/palenight.vim'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'digitaltoad/vim-pug'
+Plugin 'dracula/vim', { 'name': 'dracula' }
 
 set rtp+=/usr/local/opt/fzf
 
@@ -65,7 +66,7 @@ set ruler                                   " Show line and column number
 syntax enable                               " Turn on syntax highlighting allowing local overrides
 set encoding=utf-8                          " Set default encoding to UTF-8
 let base16colorspace=256
-color palenight                             " Set Theme
+color dracula                               " Set Theme
 set background=dark
 set wrap                                    " Wrap lines
 set autoread                                " Auto reload changed files
